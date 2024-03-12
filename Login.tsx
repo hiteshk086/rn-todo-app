@@ -1,28 +1,44 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
 import Textinput from './components/Textinput';
 import fb from './images/fb.png'
 import google from './images/google.png'
 import apple from './images/apple.png'
 import { useNavigation } from '@react-navigation/native';
+import firestore, {firebase} from '@react-native-firebase/firestore';
 
 
 
 const Login = () => {
     const navigation = useNavigation();
     const onPressLogin = () => {
+        firestore()
+        .collection('Users')
+        .where('email', '==', email)
+        .get()
+        .then(querySnapshot => {
+            console.log(querySnapshot.docs[0]);
+
+            if (querySnapshot.docs.length > 0)
+            {
+                if(querySnapshot.docs[0]._data.email === email && querySnapshot.docs[0]._data.password === password)
+                {
+                    console.log("User logged in");
+                    navigation.navigate('HomePage')
+                    setemail('')
+                    setpassword('')
+                }
+                else{
+                    Alert.alert("incorrect email id or password");
+                }
+            }else{
+                Alert.alert("User not found")
+            }
+        })
     };
 
-    const onPressForgotPassword = () => {
-    };
-
-    const onPressSignUp = () => {
-    };
-
-    const [state, setState] = useState({
-        email: '',
-        password: '',
-    })
+    const [email, setemail] = useState('');
+    const [password, setpassword] = useState('');
 
     return (
         <View style={styles.container}>
@@ -34,8 +50,8 @@ const Login = () => {
             </View>
 
             <View style={{}}>
-                <Textinput title='Enter your username'></Textinput>
-                <Textinput title='Enter your email'></Textinput>
+                <Textinput title='Enter your email' value={email} onChangeText={(e)=>setemail(e)}></Textinput>
+                <Textinput title='Enter your password' value={password} onChangeText={(e)=>setpassword(e)}></Textinput>
                 <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: 20 }}>
                     <TouchableOpacity onPress={() => {
                         navigation.navigate('Password')
@@ -45,8 +61,8 @@ const Login = () => {
 
 
 
-                <TouchableOpacity onPress={() =>
-                    navigation.navigate('HomePage')} style={{
+                <TouchableOpacity onPress={onPressLogin} 
+                style={{
                         borderWidth: 1,
                         alignSelf: 'center',
                         paddingVertical: 5,

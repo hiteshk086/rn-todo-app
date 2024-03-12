@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, Pressable,Alert } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, Pressable, Alert, Button } from 'react-native'
 import React, { useState } from 'react';
 import Stroke from './images/Stroke.png'
 import Profile2 from './images/Profile2.png'
@@ -13,29 +13,31 @@ import key from './images/key.png'
 import Help from './images/Help.png'
 import logout from './images/logout.png'
 import { useNavigation } from '@react-navigation/native'
+import Mod from './Mod';
 
 
 const Profile = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [vis, setvis] = useState(false);
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View>
 
-      <TouchableOpacity onPress={() => {
-        navigation.navigate('Catt')
-      }}>
-        <Image style={{
-          position: 'absolute',
-          flexDirection: 'row',
-          borderBottomWidth: 20,
-          marginTop: 20,
-          width: 14,
-          height: 7,
-          marginLeft: 15
-        }} source={Stroke}></Image></TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('Catt')
+        }}>
+          <Image style={{
+            position: 'absolute',
+            flexDirection: 'row',
+            borderBottomWidth: 20,
+            marginTop: 20,
+            width: 14,
+            height: 7,
+            marginLeft: 15
+          }} source={Stroke}></Image></TouchableOpacity>
 
         <Text style={styles.title}>Profile</Text>
       </View>
@@ -88,6 +90,7 @@ const Profile = () => {
           <Image style={{
             position: 'absolute',
             alignSelf: 'flex-end',
+            right: 10
           }} source={Stroke1}></Image>
         </View>
       </TouchableOpacity>
@@ -106,6 +109,7 @@ const Profile = () => {
           <Image style={{
             position: 'absolute',
             alignSelf: 'flex-end',
+            right: 10
           }} source={Stroke1}></Image>
         </View>
       </TouchableOpacity>
@@ -123,6 +127,7 @@ const Profile = () => {
           <Image style={{
             position: 'absolute',
             alignSelf: 'flex-end',
+            right: 10
           }} source={Stroke1}></Image>
 
         </View>
@@ -140,6 +145,7 @@ const Profile = () => {
           <Image style={{
             position: 'absolute',
             alignSelf: 'flex-end',
+            right: 10
           }} source={active}></Image>
         </TouchableOpacity>
       </View>
@@ -154,6 +160,7 @@ const Profile = () => {
         <Image style={{
           position: 'absolute',
           alignSelf: 'flex-end',
+          right: 10
         }} source={Stroke1}></Image>
       </View>
 
@@ -167,42 +174,71 @@ const Profile = () => {
         <Image style={{
           position: 'absolute',
           alignSelf: 'flex-end',
+          right: 10
         }} source={Stroke1}></Image>
       </View>
 
+      <TouchableOpacity onPress={() => setvis(true)}>
+        <View style={{ borderWidth: 10, borderColor: '#fffafa', backgroundColor: '#fffafa', marginTop: 1 }}>
+          <Text style={styles.privacy}>Log Out</Text>
+          <Image style={{
+            position: 'absolute',
+            marginHorizontal: 20
+          }} source={logout}></Image>
 
-      <View style={{ borderWidth: 10, borderColor: '#fffafa', backgroundColor: '#fffafa', marginTop: 1 }}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
-            </View>
+          <Image style={{
+            position: 'absolute',
+            alignSelf: 'flex-end',
+            right: 10
+          }} source={Stroke1}></Image>
+        </View>
+      </TouchableOpacity>
+
+      <Mod visible={vis} pressout={() => {
+        setvis(false)
+      }} >
+        <View>
+          <Text style={{ fontSize: 20, textAlign: 'center', color: 'black' }}>Are You Sure You want to </Text>
+          <Text style={{ fontSize: 20, textAlign: 'center', color: 'black', marginBottom: 20 }}>Log Out?</Text>
+          <View>
+            <TouchableOpacity onPress={() => {
+              setvis(false)
+              navigation.navigate('Login')
+            }
+            }
+              style={{
+                borderWidth: 1,
+                borderRadius: 50,
+                paddingVertical: 10,
+                paddingHorizontal: 30,
+                marginRight: 90,
+                //marginBottom:10,
+                alignSelf: 'flex-start',
+
+              }}>
+              <Text style={{ color: 'black', fontSize: 15 }}>Yes</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() =>
+              setvis(false)}
+              style={{
+                borderWidth: 1,
+                position: 'absolute',
+                borderRadius: 80,
+                paddingVertical: 10,
+                paddingHorizontal: 30,
+                marginRight: 90,
+                //marginBottom:10,
+                alignSelf: 'flex-end',
+
+              }}>
+              <Text style={{ color: 'black', fontSize: 15 }}>No</Text></TouchableOpacity>
+
+
+
           </View>
-        </Modal>
 
-        <Text style={styles.privacy}>Log Out</Text>
-        <Image style={{
-          position: 'absolute',
-          marginHorizontal: 20
-        }} source={logout}></Image>
+        </View>
+      </Mod>
 
-        <Image style={{
-          position: 'absolute',
-          alignSelf: 'flex-end',
-        }} source={Stroke1}></Image>
-      </View>
 
     </View>
   );

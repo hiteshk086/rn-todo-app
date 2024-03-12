@@ -1,36 +1,44 @@
 import React, { useState } from 'react';
-import {  StyleSheet, Text, View, TouchableOpacity,Image} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import  Stroke from './images/Stroke.png'
+import Stroke from './images/Stroke.png'
+import OtpInputs from 'react-native-otp-inputs';
 
 
 const Otp = () => {
     const navigation = useNavigation();
 
-    const onPressResend = () => {
-    };
 
-
-    const [state, setState] = useState({
-        email: '',
-    })
 
     return (
 
         <View style={styles.container}>
             <View style={{ marginHorizontal: 20, marginBottom: 20 }}>
-            <TouchableOpacity onPress={() => {
-        navigation.navigate('Password')
-      }}>
-        <Image style={{
-            width:9,
-            height:14,
-            marginBottom:10
-        }} source={Stroke}></Image>
-      </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Password')
+                }}>
+                    <Image style={{
+                        width: 9,
+                        height: 14,
+                        marginBottom: 10
+                    }} source={Stroke}></Image>
+                </TouchableOpacity>
                 <Text style={styles.title}>OTP Verification</Text>
                 <Text style={{ color: "#C3C3C6" }}>Enter the verification code we just sent on your email address.</Text>
-
+                <OtpInputs style={{flexDirection:'row', marginTop:20, alignSelf:'center'}} 
+                numberOfInputs={4} 
+                inputContainerStyles={{
+                    borderWidth:2, 
+                    marginHorizontal:20, 
+                    borderRadius:10, 
+                    paddingHorizontal:10, 
+                    borderColor:'#C3C3C6'}}
+                    inputStyles={{
+                        fontWeight:'bold',
+                        fontSize:20,
+                        marginLeft:5,
+                        color:'blue'
+                    }}/>
             </View>
 
 
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
         //borderWidth:1
         //marginBottom: 40,
     },
-    
+
 
     inputView: {
         width: "80%",

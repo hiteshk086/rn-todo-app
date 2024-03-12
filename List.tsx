@@ -60,7 +60,8 @@ const List = () => {
 
       
         <TouchableOpacity onPress={() =>
-          navigation.navigate('NewList')} style={{
+          navigation.navigate('NewList')} 
+          style={{
             borderWidth: 1,
             alignSelf: 'center',
             top: 20,

@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text,  View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text,  View, TouchableOpacity, Image, Alert } from 'react-native';
 import Textinput from './components/Textinput';
 import fb from './images/fb.png'
 import google from './images/google.png'
 import apple from './images/apple.png'
 import Stroke from './images/Stroke.png'
 import { useNavigation } from '@react-navigation/native';
-
+import firestore, {firebase} from '@react-native-firebase/firestore';
 
 const Register = () => {
     const navigation = useNavigation();
-    const onPressRegister = () => {
+    const Signup = () => {
+        
+        firestore()
+        .collection('Users')
+        .add({
+            username: username,
+            email: email,
+            password: password,
+            confirmpassword: confirmpassword,
+        })
+        .then(() => {
+            console.log("User Added")
+            navigation.replace('Login');
+        })
+
     };
 
 
@@ -18,6 +32,11 @@ const Register = () => {
         email: '',
         password: '',
     })
+    const [username, setusername] = useState('')
+    const [email, setemail] = useState('')
+    const [password, setpassword] = useState('')
+    const [confirmpassword, setconfirmpassword] = useState('')
+    //console.log("username : ",username);
 
     return (
         <View style={styles.container}>
@@ -41,11 +60,12 @@ const Register = () => {
             </View>
 
             <View style={{}}>
-                <Textinput title='Enter your username'></Textinput>
-                <Textinput title='Enter your email'></Textinput>
-                <Textinput title='Enter your password'></Textinput>
-                <Textinput title='Enter your confirmpassword'></Textinput>
-                <TouchableOpacity style={{ borderWidth: 1,
+                <Textinput title='Enter your username'  value={username} onChangeText={(e)=>setusername(e)}> </Textinput>
+                <Textinput title='Enter your email' value={email} onChangeText={(e)=>setemail(e)}></Textinput>
+                <Textinput title='Enter your password' value={password} onChangeText={(e)=>setpassword(e)}></Textinput>
+                <Textinput title='Enter your confirmpassword' value={confirmpassword} onChangeText={(e)=>setconfirmpassword(e)}></Textinput>
+                <TouchableOpacity onPress={Signup}
+                style={{ borderWidth: 1,
                      alignSelf: 'center',
                       paddingVertical: 5, 
                       paddingHorizontal: 100, 

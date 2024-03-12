@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -15,12 +15,14 @@ import more from './images/more.png'
 import alarm from './images/alarm.png'
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
+import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
 
 export default Home= () => {
 
   const navigation = useNavigation();
+  const swiper = useRef();
 
   const [value, setValue] = useState(new Date());
   const [week, setWeek] = useState(0);
@@ -48,47 +50,63 @@ export default Home= () => {
         </View>
 
         <View style={styles.picker}>
-
-          {weeks.map((dates, index) => (
-            <View
-              style={[styles.itemRow, { paddingHorizontal: 16 }]}
-              key={index}>
-              {dates.map((item, dateIndex) => {
-                const isActive =
-                  value.toDateString() === item.date.toDateString();
-                return (
-                  <TouchableWithoutFeedback
-                    key={dateIndex}
-                    onPress={() => setValue(item.date)}>
-                    <View
-                      style={[
-                        styles.item,
-                        isActive && {
-                          backgroundColor: '#111',
-                          borderColor: '#111',
-                        },
-                      ]}>
-                      <Text
+        <Swiper
+            index={1}
+            ref={swiper}
+            loop={false}
+            showsPagination={false}
+            onIndexChanged={ind => {
+              if (ind === 1) {
+                return;
+              }
+              setTimeout(() => {
+                const newIndex = ind - 1;
+                const newWeek = week + newIndex;
+                setWeek(newWeek);
+                setValue(moment(value).add(newIndex, 'week').toDate());
+                swiper.current.scrollTo(1, false);
+              }, 100);
+            }}>
+            {weeks.map((dates, index) => (
+              <View
+                style={[styles.itemRow, { paddingHorizontal: 16 }]}
+                key={index}>
+                {dates.map((item, dateIndex) => {
+                  const isActive =
+                    value.toDateString() === item.date.toDateString();
+                  return (
+                    <TouchableWithoutFeedback
+                      key={dateIndex}
+                      onPress={() => setValue(item.date)}>
+                      <View
                         style={[
-                          styles.itemWeekday,
-                          isActive && { color: '#fff' },
+                          styles.item,
+                          isActive && {
+                            backgroundColor: '#111',
+                            borderColor: '#111',
+                          },
                         ]}>
-                        {item.weekday}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.itemDate,
-                          isActive && { color: '#fff' },
-                        ]}>
-                        {item.date.getDate()}
-                      </Text>
-                    </View>
-                  </TouchableWithoutFeedback>
-                );
-              })}
-            </View>
-          ))}
-
+                        <Text
+                          style={[
+                            styles.itemWeekday,
+                            isActive && { color: '#fff' },
+                          ]}>
+                          {item.weekday}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.itemDate,
+                            isActive && { color: '#fff' },
+                          ]}>
+                          {item.date.getDate()}
+                        </Text>
+                      </View>
+                    </TouchableWithoutFeedback>
+                  );
+                })}
+              </View>
+            ))}
+          </Swiper>
         </View>
 
         <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24 }}>
@@ -191,6 +209,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginHorizontal: -4,
+    //overflow:'scroll'
   },
   itemWeekday: {
     fontSize: 13,

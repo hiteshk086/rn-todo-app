@@ -1,10 +1,11 @@
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image, Alert } from "react-native";
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image } from "react-native";
 import dotg from './images/dotg.png'
 import more from './images/more.png'
 import Search from './images/Search.png'
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import Textinput from "./Textinput";
+import Mod from './Mod';
 
 const DATA = [
   {
@@ -35,8 +36,10 @@ const DATA = [
 ];
 const HomePage = () => {
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [vis, setvis] = useState(false);
   const navigation = useNavigation();
-  const [visible, setvisible] = useState(true);
+
 
 
   return (
@@ -50,36 +53,79 @@ const HomePage = () => {
 
         <Image style={{ position: 'absolute', marginLeft: 310, marginTop: 16 }} source={Search}></Image>
 
+
         <FlatList data={DATA} renderItem={({ item }) =>
           <View style={{ borderWidth: 1, borderRadius: 20, borderColor: 'transparent', paddingVertical: 10, paddingRight: 10, paddingLeft: 30, marginBottom: 20, backgroundColor: 'white' }}>
             <Image style={{ position: 'absolute', marginLeft: 10, marginTop: 10, width: 10, height: 10 }} source={dotg}></Image>
 
-            <TouchableOpacity onPress={() => {
-              setvisible(true)
-            }}>
-              <Image style={{ position: 'absolute', marginTop: 10, alignSelf: 'flex-end', right: 1, height: 10 }} source={more}></Image>
-            </TouchableOpacity>
 
-            {visible && (
-              <TouchableOpacity onPress={() => {
-                Alert.alert("clicked")
-              }} style={{ backgroundColor: 'red', alignSelf: 'flex-end', top: 30, right: 15, paddingHorizontal: 10, paddingVertical: 7, position: 'absolute', borderRadius: 10 }}>
 
-                <Text>Delete</Text>
-              </TouchableOpacity>
-            )}
 
             <TouchableOpacity style={{ width: "100%" }} onPress={() => {
               navigation.navigate('Home')
             }}>
+              <View>
+
+                <TouchableOpacity onPress={() => setvis(true)}
+                  style={{
+                    backgroundColor: 'red',
+                    alignSelf: 'flex-end',
+                    top: 30,
+                    right: 15,
+                    paddingHorizontal: 10,
+                    paddingVertical: 7,
+                    position: 'absolute',
+                    borderRadius: 10
+                  }}>
+                  <Text>Delete</Text>
+                </TouchableOpacity>
+              </View>
               <Text style={{ color: 'black', fontSize: 16, marginBottom: 5, lineHeight: 15, }}>{item.title}</Text>
 
-              <Text style={{ color: 'lightgray', width: "80%"}}>{item.text}</Text>
+              <Text style={{ color: 'lightgray', width: "80%" }}>{item.text}</Text>
             </TouchableOpacity>
 
             <Text style={{ fontSize: 12, alignSelf: 'flex-end', paddingRight: 10, }}>{item.time}</Text>
           </View>
         } />
+
+<Mod visible={vis} pressout={() => {
+                  setvis(false)
+                }} >
+                  <View style={{width:250}}>
+                    <Text style={{ fontSize: 20, textAlign: 'center', color: 'black', marginBottom:10}}>Do you Want To Delete This Note?</Text>
+                    
+                    <View style={{flexDirection:'row',  justifyContent:'space-evenly' }}>
+                      <TouchableOpacity onPress={() =>
+                        navigation.navigate('HomePage')}
+                        style={{
+                          borderWidth: 1,
+                          borderRadius: 50,
+                          paddingVertical: 10,
+                          paddingHorizontal: 30,
+                          //marginRight: 90,
+                          //marginBottom:10,
+                          //alignSelf: 'flex-start',
+
+                        }}>
+                        <Text style={{ color: 'black', fontSize: 15 }}>Yes</Text></TouchableOpacity>
+                      <TouchableOpacity onPress={() =>
+                        navigation.navigate('HomePage')}
+                        style={{
+                          borderWidth: 1,
+                          //position: 'absolute',
+                          borderRadius: 80,
+                          paddingVertical: 10,
+                          paddingHorizontal: 30,
+                          //marginRight: 90,
+                          //marginBottom:10,
+                          //alignSelf: 'flex-end',
+
+                        }}>
+                        <Text style={{ color: 'black', fontSize: 15 }}>No</Text></TouchableOpacity>
+                    </View>
+                  </View>
+                </Mod>
       </View>
 
     </View>
@@ -134,7 +180,7 @@ const styles = StyleSheet.create({
     lineHeight: 19
   }
 
-  
+
 });
 
 export default HomePage;

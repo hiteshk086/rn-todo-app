@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "153349050944",
+    "project_id": "to-do-app-7dbbe",
+    "storage_bucket": "to-do-app-7dbbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153349050944:android:54cbf4fceea5e3165145a5",
+        "android_client_info": {
+          "package_name": "com.calaender"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbUwS_WPpcd37NsbqpS0HdSdlTUbX2jHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
