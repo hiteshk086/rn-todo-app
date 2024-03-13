@@ -64,10 +64,11 @@ const List = () => {
         <TouchableOpacity onPress={() =>
           navigation.navigate('NewList')} 
           style={{
-            borderWidth: 1,
+            //borderWidth: 1,
             alignSelf: 'center',
-            top: 20,
-            left: 10,
+           // top: 20,
+           // left: 10,
+             bottom:20,
             paddingVertical: 10,
             paddingHorizontal: 30,
             borderRadius: 50,

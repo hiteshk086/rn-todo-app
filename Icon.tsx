@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Stroke from './images/Stroke.png'
-
+import task from './images/task.png'
 import { useNavigation } from '@react-navigation/native'
 
 
@@ -64,11 +64,37 @@ const Icon = () => {
                 <FlatList data={DATA} renderItem={({ item }) =>
 
                     <View style={styles.box}>
-                    
+                        <TouchableOpacity>
                         <View style={{borderRadius:20, marginLeft: 10, height: 90, width: 90, backgroundColor: item.color }}></View>
-                        
+                      <Image style={{
+                          position:'absolute',
+                          alignSelf:'center',
+                          justifyContent:'center',
+                          left:30,
+                          top:20
+                        }} source={task}></Image>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
                         <View style={{ borderRadius:20, marginLeft: 30, marginRight: 20, height: 90, width: 90, backgroundColor: item.Color }}></View>
+                        <Image style={{
+                            position:'absolute',
+                            marginHorizontal:160,
+                            alignSelf:'center',
+                            top:20
+                        }} source={task}></Image>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+
                         <View style={{ borderRadius:20, marginLeft: 10, height: 90, width: 90, backgroundColor: item.colur }}></View>
+                        <Image style={{
+                            position:'absolute',
+                            marginHorizontal:280,
+                            alignSelf:'center',
+                            top:20
+                        }} source={task}></Image>
+                        </TouchableOpacity>
                     </View>
                 }>
                 </FlatList>

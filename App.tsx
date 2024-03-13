@@ -12,7 +12,6 @@ import Home from './Home';
 import List from './List';
 import calender from './calender';
 import NewList from './NewList';
-import Time from './Time';
 import Cal from './Cal';
 import Cate from './Cate';
 import Catt from './Catt';
@@ -41,7 +40,6 @@ const App = () => {
         <Stack.Screen name="List" component={List} options={{headerShown:false}}/>
         <Stack.Screen name="calender" component={calender} options={{headerShown:false}}/>
         <Stack.Screen name="NewList" component={NewList} options={{headerShown:false}}/>
-        <Stack.Screen name="Time" component={Time} options={{headerShown:false}}/>
         <Stack.Screen name="Cal" component={Cal} options={{headerShown:false}}/>
         <Stack.Screen name="Cate" component={Cate} options={{headerShown:false}}/>
         <Stack.Screen name="Catt" component={Catt} options={{headerShown:false}}/>
