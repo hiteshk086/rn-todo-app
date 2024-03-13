@@ -33,7 +33,8 @@ const List = () => {
         <Textinput title='Description'></Textinput>
         <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: 10 }}>
         </View>
-        <TouchableOpacity
+        <TouchableOpacity onPress={() =>
+          navigation.navigate('Time')} 
           style={{
             borderWidth: 1,
             alignSelf: 'flex-end',
@@ -44,7 +45,8 @@ const List = () => {
             marginRight: 20
           }}>
           <Text style={{ color: "black", fontSize: 15 }}>Select Time</Text></TouchableOpacity>
-        <TouchableOpacity
+        <TouchableOpacity onPress={() =>
+          navigation.navigate('calender')} 
           style={{
             borderWidth: 1,
             alignSelf: 'flex-start',

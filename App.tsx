@@ -10,8 +10,8 @@ import ChangedPassword from './ChangedPassword';
 import HomePage from './HomePage';
 import Home from './Home';
 import List from './List';
+import calender from './calender';
 import NewList from './NewList';
-import Date from './Date';
 import Time from './Time';
 import Cal from './Cal';
 import Cate from './Cate';
@@ -20,6 +20,7 @@ import Profile from './Profile';
 import Account from './Account';
 import Theme from './Theme';
 import Icon from './Icon';
+
 
 
 
@@ -38,8 +39,8 @@ const App = () => {
         <Stack.Screen name="HomePage" component={HomePage} options={{headerShown:false}}/>
         <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
         <Stack.Screen name="List" component={List} options={{headerShown:false}}/>
+        <Stack.Screen name="calender" component={calender} options={{headerShown:false}}/>
         <Stack.Screen name="NewList" component={NewList} options={{headerShown:false}}/>
-        <Stack.Screen name="Date" component={Date} options={{headerShown:false}}/>
         <Stack.Screen name="Time" component={Time} options={{headerShown:false}}/>
         <Stack.Screen name="Cal" component={Cal} options={{headerShown:false}}/>
         <Stack.Screen name="Cate" component={Cate} options={{headerShown:false}}/>
