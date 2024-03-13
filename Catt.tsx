@@ -68,6 +68,7 @@ const Catt = () => {
               navigation.navigate('Profile')
             }}>
               <Text style={{ color: 'lightgray' }}>{item.text}</Text>
+              <Text>abcdvgfnh</Text>
             </TouchableOpacity>
 
             <Text style={{ color: '#1B1C1F', fontSize: 12, alignSelf: 'flex-end', paddingRight: 9, }}>{item.time}</Text>
